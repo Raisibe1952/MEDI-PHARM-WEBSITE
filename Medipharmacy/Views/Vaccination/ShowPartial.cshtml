@@ -1,0 +1,93 @@
+﻿
+@model Medipharmacy.Models.Booking
+
+<style>
+    hr{
+        padding-top:0;
+        padding-bottom:0;
+        margin-top:0;
+        margin-bottom:0;
+    }
+
+    div.modal-body {
+        background-color: #E0E1DD;
+    }
+</style>
+
+@if(Model == null)
+{
+    <div class="row justify-content-center my-2">
+        <div class="col-12 text-center" style="color: red;">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+        </div>
+        <div class="col-12 text-center">
+            <h2 class="text-muted">Vaccine Booking Not Found!</h2>
+        </div>
+    </div>
+}
+else
+{
+    <div class="col-12">
+        <h4>Vaccine Booking Details</h4>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-6 fw-bold py-1 my-0">
+            First Name
+        </div>
+        <div class="col-6 py-1 my-0 text-end">
+            @Model.FirstName
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-6 fw-bold py-1 my-0">
+            Last Name
+        </div>
+        <div class="col-6 py-1 my-0 text-end">
+            @Model.LastName
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-6 fw-bold py-1 my-0">
+            Contact Number
+        </div>
+        <div class="col-6 py-1 my-0 text-end">
+            @Model.PhoneNumber
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-6 fw-bold py-1 my-0">
+            Booked On
+        </div>
+        <div class="col-6 py-1 my-0 text-end">
+            @Model.DateCreated.Date.ToString("yyyy-MM-dd") at @Model.DateCreated.ToLocalTime().ToString("HH:mm tt")
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-6 fw-bold py-1 my-0">
+            Vaccinate On
+        </div>
+        <div class="col-6 py-1 my-0 text-end">
+            @Model.DateBooked.Date.ToString("yyyy-MM-dd") at @Model.DateBooked.ToLocalTime().ToString("HH:mm tt")
+        </div>
+    </div>
+    <hr />
+    <div class="row justify-content-end">
+        <div class="col-6 py-1 my-0">
+            <button type="button" onclick="remove('/vaccination/remove/@Model.BookingId')" class="btn btn-sm btn-danger w-100">REMOVE BOOKING</button>
+        </div>
+    </div>
+    <hr />
+}
+
+<script>
+    function remove(url) {
+        $.get(url, function(res) {
+            $('div#vaccination').empty().append(res);
+        });
+    }
+</script>

@@ -1,0 +1,25 @@
+﻿@model Medipharmacy.Models.Brand
+
+<form asp-action="Update">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Brand</h5>
+    </div>
+    <div class="modal-body">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="BrandId" />
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-bs-dismiss="modal" class="btn btn-warning w-25">Cancel</button>
+        <button type="submit" class="btn btn-success w-25">Update</button>
+    </div>
+</form>

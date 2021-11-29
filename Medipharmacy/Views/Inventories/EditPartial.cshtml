@@ -1,0 +1,22 @@
+﻿@model Medipharmacy.Models.Inventory
+
+<form asp-action="Update">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Stock For @ViewBag.ProductName</h5>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="InventoryId" />
+        <input type="hidden" asp-for="ProductId" />
+        <input type="hidden" asp-for="Sold" />
+        <div class="form-group">
+            <label asp-for="Quantity" class="control-label mb-2"></label>
+            <input type="number" asp-for="Quantity" value="0" placeholder="Quantity" class="form-control" />
+            <span asp-validation-for="Quantity" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-bs-dismiss="modal" class="btn btn-warning w-25">Cancel</button>
+        <button type="submit" class="btn btn-success w-25">Capture</button>
+    </div>
+</form>
+

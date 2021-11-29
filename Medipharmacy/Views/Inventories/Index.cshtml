@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Medipharmacy.Models.Inventory>
+
+@{
+    ViewData["Title"] = "Inventories";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>Inventories</h3>
+
+<hr />
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!--Content Here-->
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover table-striped table-responsive table-info">
+    <thead>
+        <tr>
+            <th>
+                Product
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sold)
+            </th>
+            <th>Remaining</th>
+            <th style="text-align: center">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            var products = ViewBag.Products as List<Product>;
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @products.Where(p => p.ProductId.Equals(item.ProductId)).First().Name
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sold)
+                </td>
+                <th>
+                    @(item.Quantity - item.Sold)
+                </th>
+                <td style="text-align: center">
+                    <a class="btn btn-sm btn-warning w-75 mx-2" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="GetModel('/inventory/get/@item.InventoryId')"><i class="far fa-plus text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" title="add to stock"></i></a>
+                </td>
+            </tr>
+            }
+        }
+    </tbody>
+</table>

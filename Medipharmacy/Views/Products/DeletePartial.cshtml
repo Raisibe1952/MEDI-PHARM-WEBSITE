@@ -1,0 +1,12 @@
+﻿@model Medipharmacy.Models.Product
+
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+</div>
+<div class="modal-body">
+    <h6>Delete Product With Name, @Model.Name.ToUpper()?</h6>
+</div>
+<div class="modal-footer">
+    <button data-bs-dismiss="modal" class="btn btn-warning w-25">Cancel</button>
+    <a asp-action="Remove" asp-route-id="@Model.ProductId" class="btn btn-danger w-25">Delete</a>
+</div>

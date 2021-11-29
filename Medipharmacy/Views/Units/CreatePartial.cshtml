@@ -1,0 +1,32 @@
+﻿@model Medipharmacy.Models.Unit
+
+<form asp-action="Add">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create Unit</h5>
+    </div>
+    <div class="modal-body">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="UnitId" value="0" hidden />
+        <div class="form-group mb-2">
+            <select asp-for="MetricId" class="form-select" asp-items="@(new SelectList(ViewBag.metrics, "MetricId", "Name"))"></select>
+            <span asp-validation-for="MetricId" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-2">
+            <input asp-for="Name" class="form-control" placeholder="Unit Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-2">
+            <input asp-for="Code" class="form-control" placeholder="Unit Code" />
+            <span asp-validation-for="Code" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-2">
+            <input asp-for="Description" class="form-control" placeholder="Description" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-bs-dismiss="modal" class="btn btn-warning w-25">Cancel</button>
+        <button type="submit" class="btn btn-success w-25">Create</button>
+    </div>
+</form>
+

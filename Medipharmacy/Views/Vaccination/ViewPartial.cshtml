@@ -1,0 +1,68 @@
+﻿@model Medipharmacy.Models.Pair<string, string>
+
+<style>
+    hr{
+        padding-top:0;
+        padding-bottom:0;
+        margin-top:0;
+        margin-bottom:0;
+    }
+
+    div.modal-body {
+        background-color: #E0E1DD;
+    }
+</style>
+
+<div class="modal-body">
+    <div class="row">
+        <div class="col">
+            <h4>View Vaccination Booking</h4>
+        </div>
+    </div>
+
+    <hr />
+    
+    <form method="post">
+        <div class="row my-1">
+            <div class="col-12 my-1">
+                <input asp-for="Key" type="number" minlength="13" maxlength="13" class="form-control form-control-sm" placeholder="ID Number" required />
+            </div>
+            <div class="col-12 my-1">
+                <input asp-for="Value" type="number" minlength="5" maxlength="5" class="form-control form-control-sm" placeholder="Pin" required />
+            </div>
+            <div class="col-6">
+                <button type="button" data-bs-dismiss="modal" class="btn btn-sm btn-secondary w-100 my-1">CLOSE</button>
+            </div>
+            <div class="col-6">
+                <button type="submit" class="btn btn-sm text-dark btn-success w-100 my-1" >VIEW BOOKING</button>
+            </div>
+        </div>
+    </form>
+
+    <div id="vaccination" class="my-2">
+
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <a href="javascript:void(0)" onclick="GetModel('/vaccination/book')" class="text-decoration-none">Book for Vaccination</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('form').on('submit', function(e) {
+        var data = {};
+        var dataArray = $('form').serializeArray();
+        $.map(dataArray, function(n, i) {
+            data[n['name']] = n['value']
+        });
+
+        $.post("/vaccination/show", JSON.stringify(data), function(res) {
+            $("div#vaccination").empty().append(res);
+        });
+        
+        e.preventDefault();
+    });
+</script>
+

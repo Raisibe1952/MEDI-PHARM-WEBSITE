@@ -1,0 +1,78 @@
+﻿@model Medipharmacy.Models.Product
+
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Category Details Details</h5>
+</div>
+<div class="modal-body">
+    <dl class="row">
+        <dt class="col-sm-2 m-2">
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+        <dd class="col-sm-10 m-2">
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+        <dt class="col-sm-2 m-2">
+            Category
+        </dt>
+        <dd class="col-sm-10 m-2">
+            @ViewBag.categoryName
+        </dd>
+        <dt class="col-sm-2 m-2">
+            Brand
+        </dt>
+        <dd class="col-sm-10 m-2">
+            @ViewBag.brandName
+        </dd>
+        <dt class="col-sm-2 m-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10 m-2">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2 m-2">
+            Metric
+        </dt>
+        <dd class="col-sm-10 m-2">
+            @ViewBag.metricName
+        </dd>
+        <dt class="col-sm-2 m-2">
+            Units
+        </dt>
+        <dd class="col-sm-10 m-2">
+            @ViewBag.unitName
+        </dd>
+        <dt class="col-sm-2 m-2">
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+        <dd class="col-sm-10 m-2">
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+        <dt class="col-sm-2 m-2">
+            Created On
+        </dt>
+        <dd class="col-sm-10 m-2">
+            @Model.DateCreated.ToString("yyyy-MM-dd HH:mm")
+        </dd>
+        <dt class="col-sm-2 m-2">
+            Updated On
+        </dt>
+        <dd class="col-sm-10 m-2">
+            @Model.DateUpdated.ToString("yyyy-MM-dd HH:mm")
+        </dd>
+        <dt class="col-sm-2 m-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10 m-2">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2 m-2">
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+        <dd class="col-sm-10 m-2">
+            <img src="@Model.Image" class="img-fluid" height="250" width="250" asp-append-version="true" />
+        </dd>
+    </dl>
+</div>
+<div class="modal-footer">
+    <button data-bs-dismiss="modal" class="btn btn-secondary w-25">Close</button>
+</div>

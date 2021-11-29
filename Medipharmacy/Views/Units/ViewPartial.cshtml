@@ -1,0 +1,36 @@
+﻿@model Medipharmacy.Models.Unit
+
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Category Details Details</h5>
+</div>
+<div class="modal-body">
+    <dl class="row">
+        <dt class="col-sm-2 m-2">
+           Metric
+        </dt>
+        <dd class="col-sm-10 m-2">
+             @ViewBag.metricName
+        </dd>
+        <dt class="col-sm-2 m-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10 m-2">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2 m-2">
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+        <dd class="col-sm-10 m-2">
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+        <dt class="col-sm-2 m-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10 m-2">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+<div class="modal-footer">
+    <button data-bs-dismiss="modal" class="btn btn-secondary w-25">Close</button>
+</div>

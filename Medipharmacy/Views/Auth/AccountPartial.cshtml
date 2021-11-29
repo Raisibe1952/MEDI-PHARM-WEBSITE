@@ -1,0 +1,75 @@
+﻿@model Medipharmacy.Models.User
+
+<style>
+    hr {
+        padding-top:0;
+        padding-bottom:0;
+        margin-top:0;
+        margin-bottom:0;
+    }
+
+    div.modal-body {
+        background-color: #E0E1DD;
+    }
+</style>
+
+<div class="modal-body">
+    <div class="row justify-content-center mb-2">
+        <div class="col-12 text-center">
+            <h3>Account Details</h3>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row justify-content-between my-2">
+        <div class="col-md-4 col-12 text-start fw-bold">
+            Full Name
+        </div>
+        <div class="col-md-8 col-12 text-end">
+            @(Model.Firstname + " " + Model.Lastname)
+        </div>
+    </div>
+    
+    <hr />
+
+    <div class="row justify-content-between my-2">
+        <div class="col-md-4 col-12 text-start fw-bold">
+            Address
+        </div>
+        <div class="col-md-8 col-12 text-end">
+            @Model.Address
+        </div>
+    </div>
+    
+    <hr />
+
+    <div class="row justify-content-between my-2">
+        <div class="col-md-4 col-12 text-start fw-bold">
+            Phone
+        </div>
+        <div class="col-md-8 col-12 text-end">
+            @Model.PhoneNumber
+        </div>
+    </div>
+    
+    <hr />
+
+    <div class="row justify-content-between my-2">
+        <div class="col-md-4 col-12 text-start fw-bold">
+            Email
+        </div>
+        <div class="col-md-8 col-12 text-end">
+            @Model.Email
+        </div>
+    </div>
+    
+    <hr />
+
+    <div class="row mt-2">
+        <div class="col-12">
+            <input type="button" data-bs-dismiss="modal" value="CLOSE" class="btn btn-sm btn-secondary w-100" />
+        </div>
+    </div>
+
+</div>

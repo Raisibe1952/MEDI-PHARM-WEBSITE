@@ -1,0 +1,83 @@
+﻿@model Medipharmacy.Models.Pair<string, string>
+
+<style>
+    .alert {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        border: none;
+        border-radius: 0;
+    }
+
+    div.modal-body {
+        background-color: #E0E1DD;
+    }
+</style>
+
+<div class="modal-body">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <h3>Sign In</h3>
+        </div>
+    </div>
+    <hr />
+    @if(ViewBag.message != null)
+    {
+        <div class="alert text-center mt-2" role="alert" style="background-color: orangered;">
+            @ViewBag.message
+        </div>
+    }
+    <div id="status" class="mt-2">
+        <!--Status Here-->
+    </div>
+    <form method="post">
+        <div class="form-group my-2">
+            <input asp-for="Key" class="form-control form-control-sm" type="email" placeholder="Email" required />
+        </div>
+        <div class="form-group mb-2">
+            <input asp-for="Value" class="form-control form-control-sm" type="password" placeholder="Password" required />
+        </div>
+        <div class="form-group mb-2">
+            <div class="row">
+                <div class="col-6">
+                    <button type="button" data-bs-dismiss="modal" class="btn btn-sm btn-secondary w-100">CLOSE</button>
+                </div>
+                <div class="col-6">
+                    <button type="submit" class="btn btn-sm text-dark btn-success w-100" >SIGN IN</button>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-12">
+                <a href="javascript:void(0)" onclick="GetModel('/auth/signupform')" class="text-decoration-none">Sign Up</a>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-12">
+                <a href="javascript:void(0)" onclick="GetModel('/auth/forgot')" class="text-decoration-none">Forgot Password</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    $('form').on('submit', function(e) {
+        var data = {};
+        var dataArray = $('form').serializeArray();
+        $.map(dataArray, function(n, i) {
+            data[n['name']] = n['value']
+        });
+
+        $.post("/auth/signin", JSON.stringify(data), function(res) {
+            $("div#status").empty().append(res);
+            if(res.includes("Welcome")) {
+                setTimeout(function(){
+                    window.location.href = "/";
+                }, 2000);
+            }
+        });
+        
+        e.preventDefault();
+    });
+</script>

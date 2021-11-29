@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Med-Pharm</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+</head>
+<body style="background-color: lightblue">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" aria-label="Fourth navbar example">
+            <div class="container">
+                <a class="navbar-brand btn btn-lg btn-outline-info" asp-area="" asp-controller="Inventories" asp-action="Index"><i class="fa fa-plus" style="color: red;"></i> Med-Pharm Admin</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarsExample04">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a asp-controller="Inventories" asp-action="Index" class="nav-link">Inventory</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Products" asp-action="Index" class="nav-link">Product</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Categories" asp-action="Index" class="nav-link">Category</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Brand" asp-action="Index" class="nav-link">Brand</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Prices" asp-action="Index" class="nav-link">Price</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Metrics" asp-action="Index" class="nav-link">Metric</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Units" asp-action="Index" class="nav-link">Unit</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Dashboard" asp-action="Index" class="nav-link">Store Front</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mb-2" style="margin-top: 65px;">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container fixed-bottom" style="background-color: lightblue;">
+            <i class="fa fa-plus" style="color: red;"></i> Med-Pharm &copy; @DateTime.Now.Year
+        </div>
+    </footer>
+<script src="~/js/script.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

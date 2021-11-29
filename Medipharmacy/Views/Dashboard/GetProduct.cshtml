@@ -1,0 +1,95 @@
+﻿@model Medipharmacy.Models.Product
+
+<style>
+    hr{
+        padding-top:0;
+        padding-bottom:0;
+        margin-top:0;
+        margin-bottom:0;
+    }
+
+    div.modal-body {
+        background-color: #778DA9;
+    }
+</style>
+
+<div class="modal-body border-none m-0 p-0">
+    <div class="card">
+        <div class="row g-0">
+            <div class="col-12 text-center">
+                <img src="@Model.Image" class="img-fluid p-1 rounded-top w-50" alt="" asp-append-version="true">
+            </div>
+            <div class="col-12">
+                <div class="card-body bg-light">
+                    <div class="row justify-content-between">
+                        <div class="col-8">
+                            <h5 class="card-title">@Model.Name</h5>
+                        </div>
+                        <div class="col-4">
+                            <h6 class="card-title text-end">R @ViewBag.price</h6>
+                        </div>
+                    </div>
+                    <hr />
+                    <p class="card-text text-muted py-1 my-1 bg-info px-2 rounded">@Model.Description</p>
+                    <hr />
+                    <p class="card-text text-capitalize py-1 my-0"><small>Brand - @ViewBag.brand</small></p>
+                    <hr />
+                    <p class="card-text text-capitalize py-1 my-0"><small>Category - @ViewBag.category</small></p>
+                    <hr />
+                    <p class="card-text text-capitalize py-1 my-0"><small>@(ViewBag.metric + " - " + Model.Size.ToString()) <span class="text-lowercase">@ViewBag.units</span></small></p>
+                    <hr />
+                    @{
+                        var inventory = ViewBag.inventory as Inventory;
+                        if(inventory.Quantity > inventory.Sold)
+                        {
+                            <p class="card-text text-capitalize text-success py-1 my-0"><small>In stock</small></p>
+                            <hr />
+                            <div class="row bottom-0 py-1">
+                                <div class="col-6">
+                                    <button type="button" data-bs-dismiss="modal" class="btn btn-sm btn-secondary w-100">CLOSE</button>
+                                </div>
+                                <div class="col-6">
+                                    <button type="button" onclick="addToCart('/cart/add/@Model.ProductId')" class="btn btn-sm text-dark btn-success w-100">ADD TO CART</button>
+                                </div>
+                            </div>
+                        } else {
+                            <p class="card-text text-capitalize text-danger py-1 my-0"><small>Out of stock</small></p>
+                            <hr />
+                            <div class="row bottom-0 py-1">
+                                <div class="col-6">
+                                    <button type="button" data-bs-dismiss="modal" class="btn btn-sm btn-secondary w-100">CLOSE</button>
+                                </div>
+                                <div class="col-6">
+                                    <button type="submit" class="btn btn-sm text-dark btn-success w-100" disabled>ADD TO CART</button>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <div class="my-1" id="status">
+                        <!--Status Here-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<script>
+    function addToCart(url) {
+        $.get(url, function(res) {
+            if(res.includes("alert")) {
+                $('div#status').empty().append(res);
+                $(".alert").delay(4000).slideUp(1000, function () {
+                    $(this).alert('close');
+                });
+            } else {
+                $('div.modal-content').remove();
+                $('div.modal-content').empty().append(res);
+                
+                $('#exampleModal').modal('show');
+            }
+            
+        });
+    }
+</script>

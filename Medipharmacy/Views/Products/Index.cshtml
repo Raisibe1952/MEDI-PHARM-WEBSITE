@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Medipharmacy.Models.Product>
+
+@{
+    ViewData["Title"] = "Products";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>Products</h3>
+<hr />
+<p>
+    <a class="btn btn-info" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="GetModel('/product/create')"><i class="far fa-plus"></i> New Product</a>
+</p>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-dialog-scrollable">
+            <!--Content Here-->
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover table-striped table-responsive table-info">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                Brand
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th>
+                Unit
+            </th>
+            <th style="text-align: right">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            var brands = ViewBag.brands as List<Brand>;
+            var categories = ViewBag.categories as List<Category>;
+            var units = ViewBag.units as List<Unit>;
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@item.Image" class="img-fluid" height="60" width="60" asp-append-version="true" />
+                    </td>
+                    <td>
+                        @brands.Find(b => b.BrandId.Equals(item.BrandId)).Name
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @categories.Find(c => c.CategoryId.Equals(item.CategoryId)).Name
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Size)
+                    </td>
+                    <td>
+                        @units.Find(u => u.UnitId.Equals(item.UnitId)).Code.ToLower()
+                    </td>
+                    <td style="text-align: right">
+                        <div class="btn-group">
+                            <a class="mx-2" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="GetModel('/product/view/@item.ProductId')"><i class="far fa-eye text-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="view"></i></a>
+                            <a class="mx-2" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="GetModel('/product/edit/@item.ProductId')"><i class="far fa-edit text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="edit"></i></a>
+                            <a class="mx-2" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="GetModel('/product/delete/@item.ProductId')"><i class="far fa-trash-alt text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="delete"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

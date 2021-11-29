@@ -1,0 +1,22 @@
+﻿@model Medipharmacy.Models.Category
+
+<form asp-action="Add">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create Category</h5>
+    </div>
+    <div class="modal-body">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group mb-2">
+            <input asp-for="Name" class="form-control" placeholder="Category Name" required />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-2">
+            <input asp-for="Description" class="form-control" placeholder="Category Description" required />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-bs-dismiss="modal" class="btn btn-warning w-25">Cancel</button>
+        <button type="submit" class="btn btn-success w-25">Create</button>
+    </div>
+</form>

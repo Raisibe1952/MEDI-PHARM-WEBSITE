@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Medipharmacy.Models.Category>
+
+@{
+    ViewData["Title"] = "Categories";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>Categories</h3>
+<hr />
+<p>
+    <a class="btn btn-info" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="GetModel('/category/create')"><i class="far fa-plus"></i> New Category</a>
+</p>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!--Content Here-->
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover table-striped table-responsive table-info">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th style="text-align: right">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td style="text-align: right">
+                        <div class="btn-group">
+                            <a class="mx-2" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="GetModel('/category/view/@item.CategoryId')"><i class="far fa-eye text-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="view"></i></a>
+                            <a class="mx-2" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="GetModel('/category/edit/@item.CategoryId')"><i class="far fa-edit text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="edit"></i></a>
+                            <a class="mx-2" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="GetModel('/category/delete/@item.CategoryId')"><i class="far fa-trash-alt text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="delete"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+
+
+

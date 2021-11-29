@@ -1,0 +1,131 @@
+﻿@model List<Medipharmacy.Models.Cart>
+
+<style>
+    hr{
+        padding-top:0;
+        padding-bottom:0;
+        margin-top:0;
+        margin-bottom:0;
+    }
+
+    div.modal-body {
+        background-color: #E0E1DD;
+    }
+</style>
+
+<div class="modal-body">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <h3>Shopping Cart</h3>
+        </div>
+    </div>
+    <hr />
+    <div class="row my-1">
+        <div class="col-4 text-start fw-bold">
+            Product
+        </div>
+        <div class="col-4 text-center fw-bold">
+            QTY
+        </div>
+        <div class="col-4 text-end fw-bold">
+            Price
+        </div>
+    </div>
+    <hr />
+    @if(Model != null)
+    {
+        var products = ViewBag.products as List<Product>;
+        var prices = ViewBag.prices as List<Price>;
+        var total = 0.0;
+
+        foreach (var item in Model)
+        {
+            total += prices.Where(p => p.ProductId.Equals(item.ProductId)).First().Amount * (double)item.Quantity;
+            <div class="row my-1">
+                <div class="col-4 text-start">
+                    @products.Where(p => p.ProductId.Equals(item.ProductId)).First().Name
+                </div>
+                <div class="col-4 text-center">
+                    <div class="input-group input-group-sm">
+                        @if(item.Quantity > 1)
+                        {
+                            <button onclick="GetModel('/cart/minus/@item.CartId')" style="background-color: #778DA9;" class="btn btn-sm border w-25 text-warning"><i class="far fa-minus"></i></button>
+                        }
+                        else
+                        {
+                            <button onclick="GetModel('/cart/delete/@item.CartId')" style="background-color: #778DA9;" class="btn btn-sm border w-25 text-danger"><i class="far fa-trash-alt"></i></button>
+                        }
+                        <input value="@item.Quantity" style="background-color: #1B263B; color: #E0E1DD;" class="form-control form-control-sm text-center fw-bold w-50" disabled />
+                        <button onclick="GetModel('/cart/plus/@item.CartId')" style="background-color: #778DA9;" class="btn btn-sm border w-25 text-success"><i class="far fa-plus"></i></button>
+                    </div>
+                </div>
+                <div class="col-4 text-end">
+                    R @((prices.Where(p => p.ProductId.Equals(item.ProductId)).First().Amount * (double)item.Quantity).ToString("0.00"))
+                </div>
+            </div>
+            <hr />
+        }
+
+        <div class="row justify-content-between my-1">
+            <div class="col-6 text-start fw-bold">
+                Sub-Total*
+            </div>
+            <div class="col-6 text-end">
+                R @((total / 1.15).ToString("0.00"))
+            </div>
+        </div>
+
+        <div class="row justify-content-between my-1">
+            <div class="col-6 text-start fw-bold">
+                VAT*
+            </div>
+            <div class="col-6 text-end">
+                R @((total - total / 1.15).ToString("0.00"))
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row justify-content-between my-1">
+            <div class="col-6 text-start fw-bold">
+                Total
+            </div>
+            <div class="col-6 text-end fw-bold text-dark">
+                R @total.ToString("0.00")
+            </div>
+        </div>
+
+        <hr />
+
+
+        <div class="row mt-2">
+            <div class="col-6">
+                <input type="button" data-bs-dismiss="modal" value="CLOSE" class="btn btn-sm btn-secondary w-100" />
+            </div>
+            <div class="col-6">
+                <a href="cart/checkout" class="btn btn-sm btn-success w-100" >CHECKOUT</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row justify-content-center my-4">
+            <div class="col-12 text-center" style="color: orangered;">
+                <i class="fa fa-exclamation-triangle fa-3x"></i>
+            </div>
+            <div class="col-12 text-center text-muted">
+                <h3>Cart Is Empty!</h3>
+            </div>
+        </div>
+        <hr />
+        <div class="row bottom-0 py-1">
+            <div class="col-6">
+                <button type="button" data-bs-dismiss="modal" class="btn btn-sm btn-secondary w-100">CLOSE</button>
+            </div>
+            <div class="col-6">
+                <button type="submit" class="btn btn-sm text-dark btn-success w-100" disabled>CHECKOUT</button>
+            </div>
+        </div>
+    }
+
+</div>

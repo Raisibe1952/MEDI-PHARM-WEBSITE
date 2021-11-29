@@ -1,0 +1,50 @@
+﻿@model Medipharmacy.Models.Product
+
+<form asp-action="Add" enctype="multipart/form-data">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create Product</h5>
+    </div>
+    <div class="modal-body">
+        <input asp-for="ProductId" value="0" hidden />
+        <input asp-for="DateCreated" value="" hidden />
+        <input asp-for="DateUpdated" value="" hidden />
+        <input asp-for="Code" value="" hidden />
+        
+        <div class="form-group mb-2">
+            <input type="file" name="image" asp-for="Image" accept="image/*" class="form-control" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-2">
+            <select asp-for="BrandId" class="form-select" asp-items="@(new SelectList(ViewBag.brands, "BrandId", "Name"))"></select>
+            <span asp-validation-for="BrandId" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-2">
+            <select asp-for="CategoryId" class="form-select" asp-items="@(new SelectList(ViewBag.categories, "CategoryId", "Name"))"></select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-2">
+            <input asp-for="Name" class="form-control" placeholder="Product Name" required />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-2">
+            <input asp-for="Description" class="form-control" placeholder="Product Description" required />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-2">
+            <select asp-for="MetricId" class="form-select" asp-items="@(new SelectList(ViewBag.metrics, "MetricId", "Name"))"></select>
+            <span asp-validation-for="MetricId" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-2">
+            <select asp-for="UnitId" class="form-select" asp-items="@(new SelectList(ViewBag.units, "UnitId", "Name"))"></select>
+            <span asp-validation-for="UnitId" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-2">
+            <input asp-for="Size" class="form-control" placeholder="Value" required />
+            <span asp-validation-for="Size" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-bs-dismiss="modal" class="btn btn-warning w-25">Cancel</button>
+        <button type="submit" class="btn btn-success w-25">Create</button>
+    </div>
+</form>
